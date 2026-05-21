@@ -1,0 +1,24 @@
+# id;name;category;visitTime;entryFee;x;y;rating
+
+# id;name;category;visitTime;entryFee;rating;x;y
+
+1;Kadikoy;District;120;0;4.7;10;20
+2;Eminonu;Historic;90;0;4.6;20;25
+3;Ayasofya;Historic;120;25;4.9;25;30
+4;Topkapi Palace;Museum;180;40;4.8;27;32
+5;Galata Tower;Historic;60;30;4.7;18;28
+6;Taksim;District;90;0;4.5;15;35
+7;Ortakoy;District;60;0;4.6;12;40
+8;Besiktas;District;75;0;4.5;13;38
+9;Dolmabahce Palace;Museum;150;35;4.8;14;37
+10;Gulhane Park;Park;45;0;4.4;26;31
+11;Maiden Tower;Historic;60;20;4.7;11;24
+12;Pierre Loti;Viewpoint;90;15;4.6;30;40
+13;Miniaturk;Museum;120;20;4.5;22;42
+14;Sultanahmet;Historic;120;0;4.9;24;29
+15;Balat;Historic;90;0;4.5;28;38
+16;Camlica Tower;Viewpoint;75;25;4.6;35;20
+17;Beylerbeyi Palace;Museum;90;30;4.7;32;18
+18;Uskudar;District;90;0;4.6;30;15
+19;Istiklal Street;Shopping;120;0;4.5;16;34
+20;Emirgan Park;Park;90;0;4.7;8;45
