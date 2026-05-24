@@ -1,0 +1,142 @@
+GEZİROTA TEST SENARYOLARI
+
+1. TEMEL ROTA OLUŞTURMA TESTİ
+Başlangıç: Kadikoy
+Seçilen Yerler: Eminonu, Ayasofya, Topkapi Palace, Galata Tower
+Rota Tercihi: En Kısa Mesafe
+
+Beklenen Sonuç:
+- Sistem rota oluşturmalıdır.
+- Toplam mesafe, süre, maliyet ve aktarma sayısı gösterilmelidir.
+- Haritada rota çizilmelidir.
+
+
+2. EN DÜŞÜK MALİYET TESTİ
+Başlangıç: Kadikoy
+Seçilen Yerler: Eminonu, Ayasofya, Topkapi Palace, Galata Tower
+Rota Tercihi: En Düşük Maliyet
+
+Beklenen Sonuç:
+- Sistem maliyeti en düşük olan rotayı önermelidir.
+- Walk bağlantıları ücretsiz olduğu için bazı rotalarda tercih edilebilir.
+- Toplam maliyet doğru hesaplanmalıdır.
+
+
+3. EN KISA SÜRE TESTİ
+Başlangıç: Kadikoy
+Seçilen Yerler: Taksim, Istiklal Street, Besiktas
+Rota Tercihi: En Kısa Süre
+
+Beklenen Sonuç:
+- Sistem süre açısından en uygun rotayı oluşturmalıdır.
+- Toplam süre ulaşım süresi ve ziyaret süresi dahil hesaplanmalıdır.
+
+
+4. EN AZ AKTARMALI ROTA TESTİ
+Başlangıç: Kadikoy
+Seçilen Yerler: Uskudar, Beylerbeyi Palace, Camlica Tower
+Rota Tercihi: En Az Aktarma
+
+Beklenen Sonuç:
+- Sistem aktarma sayısı en az olan rotayı hesaplamalıdır.
+- Aktarma sayısı sonuç ekranında gösterilmelidir.
+
+
+5. DENGELİ ROTA TESTİ
+Başlangıç: Kadikoy
+Seçilen Yerler: Eminonu, Ayasofya, Galata Tower, Taksim
+Rota Tercihi: Dengeli Rota
+
+Beklenen Sonuç:
+- Sistem mesafe, süre, maliyet ve aktarmayı birlikte değerlendirmelidir.
+- Dengeli rota sonucu diğer alternatiflerle karşılaştırılabilmelidir.
+
+
+6. TEMA BAZLI ROTA TESTİ
+Tema: Tarihi Gezi
+Seçilen Yerler: Ayasofya, Galata Tower, Taksim, Topkapi Palace, Gulhane Park
+
+Beklenen Sonuç:
+- Historic kategorisindeki yerler filtrelenmelidir.
+- Tema dışındaki yerler rota dışı bırakılabilir.
+
+
+7. GÜNLÜK PLAN TESTİ
+Başlangıç: Kadikoy
+Seçilen Yerler: Eminonu, Ayasofya, Topkapi Palace, Galata Tower, Taksim
+Günlük Gezi Süresi: 360 dk
+
+Beklenen Sonuç:
+- Sistem rotayı günlük süre limitine göre günlere bölmelidir.
+- 1. Gün, 2. Gün şeklinde çıktı oluşturulmalıdır.
+
+
+8. BÜTÇE TESTİ
+Başlangıç: Kadikoy
+Seçilen Yerler: Ayasofya, Topkapi Palace, Galata Tower
+Bütçe: 100 TL
+
+Beklenen Sonuç:
+- Sistem toplam maliyeti hesaplamalıdır.
+- Toplam maliyet bütçeyi aşarsa kullanıcıya uyarı verilmelidir.
+
+
+9. WHAT-IF LOKASYON ÇIKARMA TESTİ
+Mevcut Rota:
+Kadikoy -> Eminonu -> Ayasofya -> Topkapi Palace -> Galata Tower
+
+İşlem:
+Ayasofya rotadan çıkarılır.
+
+Beklenen Sonuç:
+- Mevcut rota Undo Stack'e eklenmelidir.
+- Graph.copyGraph() ile geçici graph oluşturulmalıdır.
+- Ayasofya geçici graftan kaldırılmalıdır.
+- Yeni rota Dijkstra ile hesaplanmalıdır.
+- Eski ve yeni rota farkı gösterilmelidir.
+
+
+10. WHAT-IF LOKASYON EKLEME TESTİ
+Mevcut Rota:
+Kadikoy -> Eminonu -> Ayasofya -> Topkapi Palace
+
+İşlem:
+Galata Tower rotaya eklenir.
+
+Beklenen Sonuç:
+- Insertion Heuristic çalışmalıdır.
+- Galata Tower için en uygun ekleme noktası hesaplanmalıdır.
+- Ekleme maliyeti Dijkstra ile bulunmalıdır.
+- Eski ve yeni rota karşılaştırılmalıdır.
+
+
+11. UNDO TESTİ
+İşlem:
+Önce Ayasofya rotadan çıkarılır.
+Sonra Geri Al butonuna basılır.
+
+Beklenen Sonuç:
+- Önceki TripPlan Undo Stack'ten alınmalıdır.
+- Rota eski haline dönmelidir.
+
+
+12. ROTA KAYDETME TESTİ
+İşlem:
+Rota oluşturulduktan sonra Kaydet butonuna basılır.
+
+Beklenen Sonuç:
+- Rota resources/saved_routes.txt dosyasına yazılmalıdır.
+- Rota adı, tarih, rota özeti, toplam mesafe, süre, maliyet ve günlük plan dosyada görünmelidir.
+
+
+13. HATALI GİRİŞ TESTİ
+Senaryolar:
+- Başlangıç noktası seçilmeden rota oluşturma
+- Hiç gezi noktası seçmeden rota oluşturma
+- Günlük süreyi 0 girme
+- Mevcut rotada olmayan lokasyonu çıkarmaya çalışma
+- Zaten rotada olan lokasyonu tekrar eklemeye çalışma
+
+Beklenen Sonuç:
+- Program kapanmamalıdır.
+- Kullanıcıya anlaşılır uyarı verilmelidir.
