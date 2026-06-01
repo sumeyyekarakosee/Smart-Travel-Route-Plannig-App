@@ -21,7 +21,6 @@ public class Location {
 
     private int id;
     private String name;
-    private String category;
     private int visitTime;
     private double entryFee;
     private double rating;
@@ -31,7 +30,6 @@ public class Location {
 
     public Location(int id,
                     String name,
-                    String category,
                     int visitTime,
                     double entryFee,
                     double rating,
@@ -40,7 +38,6 @@ public class Location {
 
         this.id = id;
         this.name = name;
-        this.category = category;
         this.visitTime = visitTime;
         this.entryFee = entryFee;
         this.rating = rating;
@@ -62,14 +59,6 @@ public class Location {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
     }
 
     public int getVisitTime() {
@@ -114,15 +103,6 @@ public class Location {
 
     @Override
     public String toString() {
-        return "Location{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", category='" + category + '\'' +
-                ", visitTime=" + visitTime +
-                ", entryFee=" + entryFee +
-                ", rating=" + rating +
-                ", x=" + x +
-                ", y=" + y +
-                '}';
+        return name;
     }
 }
