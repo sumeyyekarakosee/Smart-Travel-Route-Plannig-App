@@ -6,7 +6,6 @@ import model.RouteEdge;
 import model.RouteStep;
 import model.TripPlan;
 import util.RoutePreference;
-import util.TripTheme;
 
 import java.util.*;
 
@@ -273,26 +272,6 @@ public class RoutePlanner {
         }
 
         return alternatives;
-    }
-    // TEMA BAZLI FİLTRELEME
-    /**
-     * Verilen ID listesinden temaya uymayan konumları filtreler.
-     *
-     * @param locationIds Filtre uygulanacak konum ID listesi
-     * @param theme       Seçilen gezi teması
-     * @return Temaya uyan konum ID'leri
-     */
-    public List<Integer> filterByTheme(List<Integer> locationIds, TripTheme theme) {
-        if (theme == TripTheme.MIXED) return new ArrayList<>(locationIds);
-
-        List<Integer> filtered = new ArrayList<>();
-        for (int id : locationIds) {
-            Location loc = graph.getLocation(id);
-            if (loc != null && theme.matches(loc.getCategory())) {
-                filtered.add(id);
-            }
-        }
-        return filtered;
     }
 
     //  WHAT-IF DESTEĞİ
