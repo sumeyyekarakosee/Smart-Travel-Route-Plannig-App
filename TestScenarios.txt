@@ -52,16 +52,7 @@ Beklenen Sonuç:
 - Dengeli rota sonucu diğer alternatiflerle karşılaştırılabilmelidir.
 
 
-6. TEMA BAZLI ROTA TESTİ
-Tema: Tarihi Gezi
-Seçilen Yerler: Ayasofya, Galata Tower, Taksim, Topkapi Palace, Gulhane Park
-
-Beklenen Sonuç:
-- Historic kategorisindeki yerler filtrelenmelidir.
-- Tema dışındaki yerler rota dışı bırakılabilir.
-
-
-7. GÜNLÜK PLAN TESTİ
+6. GÜNLÜK PLAN TESTİ
 Başlangıç: Kadikoy
 Seçilen Yerler: Eminonu, Ayasofya, Topkapi Palace, Galata Tower, Taksim
 Günlük Gezi Süresi: 360 dk
@@ -71,7 +62,7 @@ Beklenen Sonuç:
 - 1. Gün, 2. Gün şeklinde çıktı oluşturulmalıdır.
 
 
-8. BÜTÇE TESTİ
+7. BÜTÇE TESTİ
 Başlangıç: Kadikoy
 Seçilen Yerler: Ayasofya, Topkapi Palace, Galata Tower
 Bütçe: 100 TL
@@ -81,7 +72,7 @@ Beklenen Sonuç:
 - Toplam maliyet bütçeyi aşarsa kullanıcıya uyarı verilmelidir.
 
 
-9. WHAT-IF LOKASYON ÇIKARMA TESTİ
+8. WHAT-IF LOKASYON ÇIKARMA TESTİ
 Mevcut Rota:
 Kadikoy -> Eminonu -> Ayasofya -> Topkapi Palace -> Galata Tower
 
@@ -96,7 +87,7 @@ Beklenen Sonuç:
 - Eski ve yeni rota farkı gösterilmelidir.
 
 
-10. WHAT-IF LOKASYON EKLEME TESTİ
+9. WHAT-IF LOKASYON EKLEME TESTİ
 Mevcut Rota:
 Kadikoy -> Eminonu -> Ayasofya -> Topkapi Palace
 
@@ -110,7 +101,7 @@ Beklenen Sonuç:
 - Eski ve yeni rota karşılaştırılmalıdır.
 
 
-11. UNDO TESTİ
+10. UNDO TESTİ
 İşlem:
 Önce Ayasofya rotadan çıkarılır.
 Sonra Geri Al butonuna basılır.
@@ -120,7 +111,7 @@ Beklenen Sonuç:
 - Rota eski haline dönmelidir.
 
 
-12. ROTA KAYDETME TESTİ
+11. ROTA KAYDETME TESTİ
 İşlem:
 Rota oluşturulduktan sonra Kaydet butonuna basılır.
 
@@ -129,7 +120,7 @@ Beklenen Sonuç:
 - Rota adı, tarih, rota özeti, toplam mesafe, süre, maliyet ve günlük plan dosyada görünmelidir.
 
 
-13. HATALI GİRİŞ TESTİ
+12. HATALI GİRİŞ TESTİ
 Senaryolar:
 - Başlangıç noktası seçilmeden rota oluşturma
 - Hiç gezi noktası seçmeden rota oluşturma
