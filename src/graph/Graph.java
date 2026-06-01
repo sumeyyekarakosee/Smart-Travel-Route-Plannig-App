@@ -150,7 +150,6 @@ public class Graph {
             Location copiedLocation = new Location(
                     location.getId(),
                     location.getName(),
-                    location.getCategory(),
                     location.getVisitTime(),
                     location.getEntryFee(),
                     location.getRating(),
