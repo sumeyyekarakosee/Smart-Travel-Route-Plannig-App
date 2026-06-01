@@ -67,7 +67,7 @@ public class FileManager {
 
 
                 // Beklenen alan sayısı kontrol edilerek hatalı veri engellenir
-                if (parts.length != 8) {
+                if (parts.length != 7) {
                     System.out.println("Invalid location data: " + line);
                     continue;
                 }
@@ -76,22 +76,20 @@ public class FileManager {
                 // String veriler uygun Java veri tiplerine dönüştürülür
                 int id = Integer.parseInt(parts[0]);
                 String name = parts[1];
-                String category = parts[2];
 
-                int visitTime = Integer.parseInt(parts[3]);
+                int visitTime = Integer.parseInt(parts[2]);
 
-                double entryFee = Double.parseDouble(parts[4]);
-                double rating = Double.parseDouble(parts[5]);
+                double entryFee = Double.parseDouble(parts[3]);
+                double rating = Double.parseDouble(parts[4]);
 
-                double x = Double.parseDouble(parts[6]);
-                double y = Double.parseDouble(parts[7]);
+                double x = Double.parseDouble(parts[5]);
+                double y = Double.parseDouble(parts[6]);
 
 
                 // Parse edilen veriler kullanılarak Location nesnesi oluşturulur
                 Location location = new Location(
                         id,
                         name,
-                        category,
                         visitTime,
                         entryFee,
                         rating,
