@@ -1,6 +1,9 @@
 # id;name;visitTime;entryFee;rating;x;y
+<<<<<<< HEAD
 # Not: x/y değerleri eski yerel koordinatlardır; uygulama bunları gerçek
 # İstanbul enlem/boylamına projekte ederek harita üzerinde gösterir.
+=======
+>>>>>>> 494ce42bcb7a869a8dbf3c0ee8a8047e3ac4dd8f
 
 # =========================
 # İLÇELER / SEMT NOKTALARI

@@ -3,6 +3,7 @@ package ui.view;
 import graph.Graph;
 import javafx.animation.FadeTransition;
 import javafx.animation.ScaleTransition;
+<<<<<<< HEAD
 import javafx.geometry.Insets;
 import javafx.geometry.Point2D;
 import javafx.geometry.Rectangle2D;
@@ -20,14 +21,28 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
+=======
+import javafx.geometry.Point2D;
+import javafx.geometry.Rectangle2D;
+import javafx.scene.Group;
+import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.Line;
+>>>>>>> 494ce42bcb7a869a8dbf3c0ee8a8047e3ac4dd8f
 import javafx.util.Duration;
 import model.Location;
 import model.RouteStep;
 import model.TripPlan;
 import model.WhatIfComparison;
 
+<<<<<<< HEAD
 import java.nio.file.Files;
 import java.nio.file.Path;
+=======
+>>>>>>> 494ce42bcb7a869a8dbf3c0ee8a8047e3ac4dd8f
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashSet;
@@ -36,6 +51,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
+<<<<<<< HEAD
  * OpenStreetMap raster tiles rendered directly inside a JavaFX Pane.
  *
  * This version supports:
@@ -50,12 +66,20 @@ public class MapRenderer {
     private static final int MIN_ZOOM = 10;
     private static final int MAX_ZOOM = 13;
 
+=======
+ * Harita alanini locations.txt icindeki koordinatlari kullanarak cizer.
+ * Noktalar Istanbul yerlesimine gore panoya dagitilir ve rota adimlari cizgiyle baglanir.
+ */
+public class MapRenderer {
+
+>>>>>>> 494ce42bcb7a869a8dbf3c0ee8a8047e3ac4dd8f
     private static final Color START_COLOR = Color.web("#1e88e5");
     private static final Color SELECTED_COLOR = Color.web("#43a047");
     private static final Color NORMAL_COLOR = Color.web("#ffffff");
     private static final Color OUTLINE_COLOR = Color.web("#94a3b8");
     private static final Color LABEL_COLOR = Color.web("#0f172a");
     private static final Color OLD_ROUTE_COLOR = Color.web("#e53935");
+<<<<<<< HEAD
     private static final Color TILE_BACKGROUND = Color.web("#dfeff8");
     private static final String TRANSPARENT_PIXEL =
             "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGNgYAAAAAMAASsJTYQAAAAASUVORK5CYII=";
@@ -85,6 +109,8 @@ public class MapRenderer {
     private WhatIfComparison currentComparison;
     private Set<Integer> currentSelectedIds = Set.of();
     private Integer currentStartId;
+=======
+>>>>>>> 494ce42bcb7a869a8dbf3c0ee8a8047e3ac4dd8f
 
     public void render(Pane mapPane,
                        Graph graph,
@@ -97,6 +123,7 @@ public class MapRenderer {
             return;
         }
 
+<<<<<<< HEAD
         ensureInitialized(mapPane);
 
         currentGraph = graph;
@@ -251,10 +278,24 @@ public class MapRenderer {
 
         List<Location> locations = new ArrayList<>(currentGraph.getAllLocations());
         locations.sort(Comparator.comparingInt(Location::getId));
+=======
+        mapPane.getChildren().clear();
+
+        double width = resolveSize(mapPane.getWidth(), mapPane.getPrefWidth(), 900);
+        double height = resolveSize(mapPane.getHeight(), mapPane.getPrefHeight(), 700);
+
+        Group content = new Group();
+        mapPane.getChildren().add(content);
+
+        List<Location> locations = new ArrayList<>(graph.getAllLocations());
+        locations.sort(Comparator.comparingInt(Location::getId));
+
+>>>>>>> 494ce42bcb7a869a8dbf3c0ee8a8047e3ac4dd8f
         if (locations.isEmpty()) {
             return;
         }
 
+<<<<<<< HEAD
         TripPlan activePlan = currentPlan != null ? currentPlan : currentComparison != null ? currentComparison.getNewPlan() : null;
         Set<Integer> routeIds = collectSelectedRouteIds(activePlan, currentComparison);
 
@@ -277,18 +318,55 @@ public class MapRenderer {
 
             double circleRadius = circleRadiusForZoom(currentZoom);
             Circle circle = new Circle(screen.getX(), screen.getY(), circleRadius);
+=======
+        MapBounds bounds = MapBounds.from(locations);
+        List<RenderItem> items = new ArrayList<>();
+        for (Location location : locations) {
+            items.add(new RenderItem(location, scale(location, bounds, width, height)));
+        }
+
+        TripPlan activePlan = plan != null ? plan : (comparison != null ? comparison.getNewPlan() : null);
+        Set<Integer> routeIds = collectSelectedRouteIds(activePlan);
+
+        if (comparison != null && comparison.getOldPlan() != null) {
+            drawPlanLines(content, comparison.getOldPlan(), bounds, width, height, OLD_ROUTE_COLOR, true, 0.70);
+        }
+
+        if (plan != null) {
+            drawPlanLines(content, plan, bounds, width, height, SELECTED_COLOR, false, 0.92);
+        } else if (comparison != null && comparison.getNewPlan() != null) {
+            drawPlanLines(content, comparison.getNewPlan(), bounds, width, height, SELECTED_COLOR, false, 0.92);
+        }
+
+        List<Rectangle2D> occupiedLabels = new ArrayList<>();
+        for (RenderItem item : items) {
+            boolean isRouteNode = routeIds.contains(item.location.getId());
+            boolean isStartNode = startId != null && item.location.getId() == startId;
+            boolean isSelectedNode = selectedIds != null && selectedIds.contains(item.location.getId());
+
+            Circle circle = new Circle(item.point.getX(), item.point.getY(), 12);
+>>>>>>> 494ce42bcb7a869a8dbf3c0ee8a8047e3ac4dd8f
             circle.setStroke(OUTLINE_COLOR);
             circle.setStrokeWidth(2);
             circle.setFill(determineFill(isStartNode, isRouteNode, isSelectedNode));
 
+<<<<<<< HEAD
             Tooltip.install(circle, new Tooltip(buildTooltipText(location)));
+=======
+            Tooltip.install(circle, new Tooltip(buildTooltipText(item.location)));
+>>>>>>> 494ce42bcb7a869a8dbf3c0ee8a8047e3ac4dd8f
 
             circle.setOnMouseEntered(event -> {
                 circle.setStroke(Color.web("#1565c0"));
                 circle.setStrokeWidth(3);
                 ScaleTransition transition = new ScaleTransition(Duration.millis(120), circle);
+<<<<<<< HEAD
                 transition.setToX(1.14);
                 transition.setToY(1.14);
+=======
+                transition.setToX(1.15);
+                transition.setToY(1.15);
+>>>>>>> 494ce42bcb7a869a8dbf3c0ee8a8047e3ac4dd8f
                 transition.play();
             });
 
@@ -301,22 +379,36 @@ public class MapRenderer {
                 transition.play();
             });
 
+<<<<<<< HEAD
             Label label = createLabel(location.getName());
             LabelPlacement placement = placeLabel(screen, label, width, height, occupiedLabels);
+=======
+            Label label = createLabel(item.location.getName());
+            LabelPlacement placement = placeLabel(item, label, width, height, occupiedLabels);
+>>>>>>> 494ce42bcb7a869a8dbf3c0ee8a8047e3ac4dd8f
             label.setLayoutX(placement.x);
             label.setLayoutY(placement.y);
             occupiedLabels.add(placement.bounds);
 
+<<<<<<< HEAD
             markerLayer.getChildren().addAll(circle, label);
         }
 
         markerLayer.setOpacity(0);
         FadeTransition fade = new FadeTransition(Duration.millis(180), markerLayer);
+=======
+            content.getChildren().addAll(circle, label);
+        }
+
+        content.setOpacity(0);
+        FadeTransition fade = new FadeTransition(Duration.millis(220), content);
+>>>>>>> 494ce42bcb7a869a8dbf3c0ee8a8047e3ac4dd8f
         fade.setFromValue(0);
         fade.setToValue(1);
         fade.play();
     }
 
+<<<<<<< HEAD
     private void redrawBackground(double width, double height) {
         tileLayer.getChildren().clear();
         Rectangle background = new Rectangle(width, height);
@@ -390,6 +482,11 @@ public class MapRenderer {
 
     private void drawPlanLines(Pane content,
                                TripPlan plan,
+=======
+    private void drawPlanLines(Group content,
+                               TripPlan plan,
+                               MapBounds bounds,
+>>>>>>> 494ce42bcb7a869a8dbf3c0ee8a8047e3ac4dd8f
                                double width,
                                double height,
                                Color color,
@@ -406,7 +503,11 @@ public class MapRenderer {
                 if (step == null || step.getFrom() == null || step.getTo() == null) {
                     continue;
                 }
+<<<<<<< HEAD
                 drawLine(content, toScreen(step.getFrom(), width, height), toScreen(step.getTo(), width, height), color, dashed, opacity);
+=======
+                drawLine(content, scale(step.getFrom(), bounds, width, height), scale(step.getTo(), bounds, width, height), color, dashed, opacity);
+>>>>>>> 494ce42bcb7a869a8dbf3c0ee8a8047e3ac4dd8f
             }
             return;
         }
@@ -422,11 +523,19 @@ public class MapRenderer {
             if (from == null || to == null) {
                 continue;
             }
+<<<<<<< HEAD
             drawLine(content, toScreen(from, width, height), toScreen(to, width, height), color, dashed, opacity);
         }
     }
 
     private void drawLine(Pane content,
+=======
+            drawLine(content, scale(from, bounds, width, height), scale(to, bounds, width, height), color, dashed, opacity);
+        }
+    }
+
+    private void drawLine(Group content,
+>>>>>>> 494ce42bcb7a869a8dbf3c0ee8a8047e3ac4dd8f
                           Point2D from,
                           Point2D to,
                           Color color,
@@ -434,14 +543,22 @@ public class MapRenderer {
                           double opacity) {
         Line line = new Line(from.getX(), from.getY(), to.getX(), to.getY());
         line.setStroke(color);
+<<<<<<< HEAD
         line.setStrokeWidth(4.0);
         line.setOpacity(opacity);
         if (dashed) {
             line.getStrokeDashArray().setAll(12.0, 8.0);
+=======
+        line.setStrokeWidth(3.0);
+        line.setOpacity(opacity);
+        if (dashed) {
+            line.getStrokeDashArray().setAll(10.0, 8.0);
+>>>>>>> 494ce42bcb7a869a8dbf3c0ee8a8047e3ac4dd8f
         }
         content.getChildren().add(line);
     }
 
+<<<<<<< HEAD
     private Label createLabel(String name) {
         Label label = new Label(name);
         label.getStyleClass().add("map-label");
@@ -600,6 +717,13 @@ public class MapRenderer {
     private Set<Integer> collectSelectedRouteIds(TripPlan plan, WhatIfComparison comparison) {
         Set<Integer> ids = new HashSet<>();
         addRouteIds(plan, ids);
+=======
+    private Set<Integer> collectSelectedRouteIds(TripPlan plan, WhatIfComparison comparison) {
+        Set<Integer> ids = new HashSet<>();
+        if (plan != null) {
+            addRouteIds(plan, ids);
+        }
+>>>>>>> 494ce42bcb7a869a8dbf3c0ee8a8047e3ac4dd8f
         if (comparison != null) {
             addRouteIds(comparison.getNewPlan(), ids);
             addRouteIds(comparison.getOldPlan(), ids);
@@ -636,6 +760,7 @@ public class MapRenderer {
         }
     }
 
+<<<<<<< HEAD
     private Point2D latLonToWorldPixels(double lat, double lon, int zoom) {
         double sinLat = Math.sin(Math.toRadians(lat));
         double worldSize = TILE_SIZE * Math.pow(2, zoom);
@@ -663,6 +788,145 @@ public class MapRenderer {
                 + "\nPuan: " + String.format("%.1f", location.getRating())
                 + "\nZiyaret Süresi: " + location.getVisitTime() + " dk"
                 + "\nGiriş Ücreti: " + String.format("%.0f", location.getEntryFee()) + " TL";
+=======
+    private Label createLabel(String name) {
+        Label label = new Label(name);
+        label.getStyleClass().add("map-label");
+        label.setTextFill(LABEL_COLOR);
+        label.setMouseTransparent(true);
+        return label;
+    }
+
+    private LabelPlacement placeLabel(RenderItem item,
+                                      Label label,
+                                      double paneWidth,
+                                      double paneHeight,
+                                      List<Rectangle2D> occupiedLabels) {
+
+        String text = item.location.getName();
+        double labelWidth = estimateLabelWidth(text);
+        double labelHeight = estimateLabelHeight(text, labelWidth);
+        double gap = 14;
+        double circleX = item.point.getX();
+        double circleY = item.point.getY();
+
+        List<Point2D> candidates = buildCandidates(circleX, circleY, labelWidth, labelHeight, gap, paneWidth, paneHeight);
+
+        Point2D bestPoint = candidates.get(0);
+        Rectangle2D bestBounds = rectangle(bestPoint.getX(), bestPoint.getY(), labelWidth, labelHeight);
+        int bestScore = Integer.MAX_VALUE;
+
+        for (Point2D candidate : candidates) {
+            Rectangle2D bounds = rectangle(candidate.getX(), candidate.getY(), labelWidth, labelHeight);
+            int score = score(bounds, occupiedLabels, paneWidth, paneHeight);
+            if (score < bestScore) {
+                bestScore = score;
+                bestPoint = candidate;
+                bestBounds = bounds;
+                if (score == 0) {
+                    break;
+                }
+            }
+        }
+
+        LabelPlacement placement = new LabelPlacement();
+        placement.x = bestPoint.getX();
+        placement.y = bestPoint.getY();
+        placement.bounds = bestBounds;
+        return placement;
+    }
+
+    private List<Point2D> buildCandidates(double circleX,
+                                          double circleY,
+                                          double labelWidth,
+                                          double labelHeight,
+                                          double gap,
+                                          double paneWidth,
+                                          double paneHeight) {
+
+        double centerX = paneWidth / 2.0;
+        double centerY = paneHeight / 2.0;
+        boolean leftSide = circleX < centerX;
+        boolean upperSide = circleY < centerY;
+
+        List<Point2D> candidates = new ArrayList<>();
+
+        if (leftSide) {
+            candidates.add(candidate(circleX + gap, circleY - labelHeight / 2.0, labelWidth, labelHeight, paneWidth, paneHeight));
+            candidates.add(candidate(circleX + gap, circleY + 14, labelWidth, labelHeight, paneWidth, paneHeight));
+            candidates.add(candidate(circleX + gap, circleY - labelHeight - 14, labelWidth, labelHeight, paneWidth, paneHeight));
+            candidates.add(candidate(circleX - labelWidth - gap, circleY - labelHeight / 2.0, labelWidth, labelHeight, paneWidth, paneHeight));
+            candidates.add(candidate(circleX - labelWidth - gap, circleY + 14, labelWidth, labelHeight, paneWidth, paneHeight));
+            candidates.add(candidate(circleX - labelWidth - gap, circleY - labelHeight - 14, labelWidth, labelHeight, paneWidth, paneHeight));
+        } else {
+            candidates.add(candidate(circleX - labelWidth - gap, circleY - labelHeight / 2.0, labelWidth, labelHeight, paneWidth, paneHeight));
+            candidates.add(candidate(circleX - labelWidth - gap, circleY + 14, labelWidth, labelHeight, paneWidth, paneHeight));
+            candidates.add(candidate(circleX - labelWidth - gap, circleY - labelHeight - 14, labelWidth, labelHeight, paneWidth, paneHeight));
+            candidates.add(candidate(circleX + gap, circleY - labelHeight / 2.0, labelWidth, labelHeight, paneWidth, paneHeight));
+            candidates.add(candidate(circleX + gap, circleY + 14, labelWidth, labelHeight, paneWidth, paneHeight));
+            candidates.add(candidate(circleX + gap, circleY - labelHeight - 14, labelWidth, labelHeight, paneWidth, paneHeight));
+        }
+
+        if (upperSide) {
+            candidates.add(candidate(circleX - labelWidth / 2.0, circleY + gap + 14, labelWidth, labelHeight, paneWidth, paneHeight));
+        } else {
+            candidates.add(candidate(circleX - labelWidth / 2.0, circleY - labelHeight - gap - 14, labelWidth, labelHeight, paneWidth, paneHeight));
+        }
+
+        candidates.add(candidate(circleX + 18, circleY - labelHeight / 2.0, labelWidth, labelHeight, paneWidth, paneHeight));
+        candidates.add(candidate(circleX - labelWidth - 18, circleY - labelHeight / 2.0, labelWidth, labelHeight, paneWidth, paneHeight));
+
+        return candidates;
+    }
+
+    private Point2D candidate(double x, double y, double labelWidth, double labelHeight, double paneWidth, double paneHeight) {
+        double clampedX = clamp(x, 8, Math.max(8, paneWidth - labelWidth - 8));
+        double clampedY = clamp(y, 8, Math.max(8, paneHeight - labelHeight - 8));
+        return new Point2D(clampedX, clampedY);
+    }
+
+    private int score(Rectangle2D bounds, List<Rectangle2D> occupied, double paneWidth, double paneHeight) {
+        int score = 0;
+
+        if (bounds.getMinX() < 6 || bounds.getMinY() < 6
+                || bounds.getMaxX() > paneWidth - 6
+                || bounds.getMaxY() > paneHeight - 6) {
+            score += 6;
+        }
+
+        for (Rectangle2D existing : occupied) {
+            if (existing.intersects(bounds.getMinX(), bounds.getMinY(), bounds.getWidth(), bounds.getHeight())) {
+                score += 12;
+            }
+        }
+
+        return score;
+    }
+
+    private Rectangle2D rectangle(double x, double y, double width, double height) {
+        return new Rectangle2D(x, y, width, height);
+    }
+
+    private Point2D scale(Location location, MapBounds bounds, double paneWidth, double paneHeight) {
+        double usableWidth = Math.max(1, paneWidth - bounds.horizontalPadding * 2.0);
+        double usableHeight = Math.max(1, paneHeight - bounds.verticalPadding * 2.0);
+        double xRatio = bounds.xRange == 0 ? 0.5 : (location.getX() - bounds.minX) / bounds.xRange;
+        double yRatio = bounds.yRange == 0 ? 0.5 : (location.getY() - bounds.minY) / bounds.yRange;
+
+        double x = bounds.horizontalPadding + (xRatio * usableWidth);
+        double y = bounds.verticalPadding + (yRatio * usableHeight);
+
+        return new Point2D(clamp(x, 18, Math.max(18, paneWidth - 18)), clamp(y, 18, Math.max(18, paneHeight - 18)));
+    }
+
+    private String buildTooltipText(Location location) {
+        String category = location.getId() <= 20 ? "Ilce / Semt" : "Tarihi / Turistik";
+        return location.getName()
+                + "\nKategori: " + category
+                + "\nPuan: " + String.format("%.1f", location.getRating())
+                + "\nZiyaret Suresi: " + location.getVisitTime() + " dk"
+                + "\nGiris Ucreti: " + String.format("%.0f", location.getEntryFee()) + " TL";
+>>>>>>> 494ce42bcb7a869a8dbf3c0ee8a8047e3ac4dd8f
     }
 
     private Color determineFill(boolean isStartNode, boolean isRouteNode, boolean isSelectedNode) {
@@ -696,12 +960,33 @@ public class MapRenderer {
         return defaultValue;
     }
 
+<<<<<<< HEAD
     private int clamp(int value, int min, int max) {
         return Math.max(min, Math.min(max, value));
     }
 
     private double clampDouble(double value, double min, double max) {
         return Math.max(min, Math.min(max, value));
+=======
+    private double clamp(double value, double min, double max) {
+        return Math.max(min, Math.min(max, value));
+    }
+
+    private Set<Integer> collectSelectedRouteIds(TripPlan plan) {
+        Set<Integer> ids = new LinkedHashSet<>();
+        addRouteIds(plan, ids);
+        return ids;
+    }
+
+    private static class RenderItem {
+        private final Location location;
+        private final Point2D point;
+
+        private RenderItem(Location location, Point2D point) {
+            this.location = location;
+            this.point = point;
+        }
+>>>>>>> 494ce42bcb7a869a8dbf3c0ee8a8047e3ac4dd8f
     }
 
     private static class LabelPlacement {
@@ -709,4 +994,50 @@ public class MapRenderer {
         private double y;
         private Rectangle2D bounds;
     }
+<<<<<<< HEAD
+=======
+
+    private static class MapBounds {
+        private final double minX;
+        private final double maxX;
+        private final double minY;
+        private final double maxY;
+        private final double xRange;
+        private final double yRange;
+        private final double horizontalPadding;
+        private final double verticalPadding;
+
+        private MapBounds(double minX, double maxX, double minY, double maxY) {
+            this.minX = minX;
+            this.maxX = maxX;
+            this.minY = minY;
+            this.maxY = maxY;
+            this.xRange = Math.max(1, maxX - minX);
+            this.yRange = Math.max(1, maxY - minY);
+            this.horizontalPadding = 34;
+            this.verticalPadding = 30;
+        }
+
+        private static MapBounds from(List<Location> locations) {
+            double minX = Double.MAX_VALUE;
+            double minY = Double.MAX_VALUE;
+            double maxX = -Double.MAX_VALUE;
+            double maxY = -Double.MAX_VALUE;
+
+            for (Location location : locations) {
+                minX = Math.min(minX, location.getX());
+                minY = Math.min(minY, location.getY());
+                maxX = Math.max(maxX, location.getX());
+                maxY = Math.max(maxY, location.getY());
+            }
+
+            if (minX == Double.MAX_VALUE || minY == Double.MAX_VALUE) {
+                minX = minY = 0;
+                maxX = maxY = 1;
+            }
+
+            return new MapBounds(minX, maxX, minY, maxY);
+        }
+    }
+>>>>>>> 494ce42bcb7a869a8dbf3c0ee8a8047e3ac4dd8f
 }

@@ -22,7 +22,11 @@ Java + JavaFX ile geliştirilmiş, İstanbul üzerindeki gezi noktaları için r
   - Lokasyon ekleme
   - Undo
   - Eski / yeni rota karşılaştırması
+<<<<<<< HEAD
 - Leaflet/OpenStreetMap tabanlı gerçek harita görünümü
+=======
+- JavaFX üzerinde özel 2D harita çizimi
+>>>>>>> 494ce42bcb7a869a8dbf3c0ee8a8047e3ac4dd8f
 - Açık, renkli ve temiz tasarım
 
 ## Proje Yapısı
@@ -87,8 +91,13 @@ fromId;toId;distance;time;cost;transport;transfer
 
 - Java 23
 - JavaFX SDK
+<<<<<<< HEAD
 > Not: Bu projede JavaFX, JDK ile birlikte gelmiyor. Çalıştırmak için JavaFX SDK yolunu ayrıca vermen gerekir.
 > Harita görünümü OpenStreetMap raster tile'larını kullanır ve internet bağlantısı gerekir.
+=======
+
+> Not: Bu projede JavaFX, JDK ile birlikte gelmiyor. Çalıştırmak için JavaFX SDK yolunu ayrıca vermen gerekir.
+>>>>>>> 494ce42bcb7a869a8dbf3c0ee8a8047e3ac4dd8f
 
 ## IntelliJ IDEA ile Çalıştırma
 
@@ -151,7 +160,11 @@ java --module-path "C:\javafx-sdk-23\lib" --add-modules javafx.controls,javafx.f
 
 ## Notlar
 
+<<<<<<< HEAD
 - Harita Leaflet + OpenStreetMap ile gerçek coğrafi katman olarak çalışır.
+=======
+- Harita gerçek API kullanmaz, JavaFX üzerinde özel olarak çizilir.
+>>>>>>> 494ce42bcb7a869a8dbf3c0ee8a8047e3ac4dd8f
 - Rota hesaplamalarında temel algoritma Dijkstra’dır.
 - What-If ekleme işlemi için insertion heuristic kullanılır.
 - Rota kayıtları `resources/saved_routes.txt` içine eklenir.

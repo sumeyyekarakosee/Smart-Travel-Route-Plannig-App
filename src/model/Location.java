@@ -25,9 +25,12 @@ public class Location {
     private double entryFee;
     private double rating;
 
+<<<<<<< HEAD
     private double latitude;
     private double longitude;
 
+=======
+>>>>>>> 494ce42bcb7a869a8dbf3c0ee8a8047e3ac4dd8f
     private double x;
     private double y;
 
@@ -39,6 +42,7 @@ public class Location {
                     double x,
                     double y) {
 
+<<<<<<< HEAD
         this(id, name, visitTime, entryFee, rating,
                 Double.NaN, Double.NaN,
                 x, y);
@@ -54,13 +58,18 @@ public class Location {
                     double x,
                     double y) {
 
+=======
+>>>>>>> 494ce42bcb7a869a8dbf3c0ee8a8047e3ac4dd8f
         this.id = id;
         this.name = name;
         this.visitTime = visitTime;
         this.entryFee = entryFee;
         this.rating = rating;
+<<<<<<< HEAD
         this.latitude = latitude;
         this.longitude = longitude;
+=======
+>>>>>>> 494ce42bcb7a869a8dbf3c0ee8a8047e3ac4dd8f
         this.x = x;
         this.y = y;
     }
@@ -105,6 +114,7 @@ public class Location {
         this.rating = rating;
     }
 
+<<<<<<< HEAD
     public double getLatitude() {
         return latitude;
     }
@@ -121,6 +131,8 @@ public class Location {
         this.longitude = longitude;
     }
 
+=======
+>>>>>>> 494ce42bcb7a869a8dbf3c0ee8a8047e3ac4dd8f
     public double getX() {
         return x;
     }
@@ -137,6 +149,7 @@ public class Location {
         this.y = y;
     }
 
+<<<<<<< HEAD
     public boolean hasGeographicCoordinates() {
         return !Double.isNaN(latitude)
                 && !Double.isNaN(longitude)
@@ -144,6 +157,8 @@ public class Location {
                 && Math.abs(longitude) > 0.000001;
     }
 
+=======
+>>>>>>> 494ce42bcb7a869a8dbf3c0ee8a8047e3ac4dd8f
     @Override
     public String toString() {
         return name;

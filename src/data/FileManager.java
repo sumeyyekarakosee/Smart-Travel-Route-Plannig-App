@@ -19,7 +19,10 @@ package data;
 
 import model.Location;
 import model.RouteEdge;
+<<<<<<< HEAD
 import ui.view.IstanbulGeoProjection;
+=======
+>>>>>>> 494ce42bcb7a869a8dbf3c0ee8a8047e3ac4dd8f
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -35,9 +38,13 @@ public class FileManager {
       bir Location nesnesine dönüştürür.
 
       Beklenen veri formatı:
+<<<<<<< HEAD
       - id;name;visitTime;entryFee;rating;x;y
       veya
       - id;name;visitTime;entryFee;rating;latitude;longitude;x;y
+=======
+      - id;name;category;visitTime;entryFee;rating;x;y
+>>>>>>> 494ce42bcb7a869a8dbf3c0ee8a8047e3ac4dd8f
 
       Hatalı veya eksik satırlar güvenli şekilde atlanır.
      */
@@ -70,7 +77,11 @@ public class FileManager {
 
 
                 // Beklenen alan sayısı kontrol edilerek hatalı veri engellenir
+<<<<<<< HEAD
                 if (parts.length != 7 && parts.length != 9) {
+=======
+                if (parts.length != 7) {
+>>>>>>> 494ce42bcb7a869a8dbf3c0ee8a8047e3ac4dd8f
                     System.out.println("Invalid location data: " + line);
                     continue;
                 }
@@ -85,6 +96,7 @@ public class FileManager {
                 double entryFee = Double.parseDouble(parts[3]);
                 double rating = Double.parseDouble(parts[4]);
 
+<<<<<<< HEAD
                 Location location;
                 if (parts.length == 9) {
                     double latitude = Double.parseDouble(parts[5]);
@@ -116,6 +128,22 @@ public class FileManager {
                     );
                     IstanbulGeoProjection.project(location);
                 }
+=======
+                double x = Double.parseDouble(parts[5]);
+                double y = Double.parseDouble(parts[6]);
+
+
+                // Parse edilen veriler kullanılarak Location nesnesi oluşturulur
+                Location location = new Location(
+                        id,
+                        name,
+                        visitTime,
+                        entryFee,
+                        rating,
+                        x,
+                        y
+                );
+>>>>>>> 494ce42bcb7a869a8dbf3c0ee8a8047e3ac4dd8f
 
 
                 // Oluşturulan nesne sonuç listesine eklenir

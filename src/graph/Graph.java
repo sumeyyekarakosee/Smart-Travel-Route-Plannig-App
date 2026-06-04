@@ -153,8 +153,11 @@ public class Graph {
                     location.getVisitTime(),
                     location.getEntryFee(),
                     location.getRating(),
+<<<<<<< HEAD
                     location.getLatitude(),
                     location.getLongitude(),
+=======
+>>>>>>> 494ce42bcb7a869a8dbf3c0ee8a8047e3ac4dd8f
                     location.getX(),
                     location.getY()
             );
