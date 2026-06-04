@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane fx:id="rootPane" xmlns:fx="http://javafx.com/fxml" fx:controller="ui.controller.MainController" styleClass="app-root">
+    <fx:define>
+        <ToggleGroup fx:id="routePreferenceGroup"/>
+    </fx:define>
+
+    <top>
+        <VBox spacing="6" styleClass="header-bar" BorderPane.alignment="CENTER">
+            <padding>
+                <Insets top="18" right="24" bottom="16" left="24"/>
+            </padding>
+            <Label text="Akıllı Gezi Rotası Planlama Uygulaması" styleClass="app-title"/>
+            <Label text="" styleClass="app-subtitle"/>
+        </VBox>
+    </top>
+
+    <center>
+        <SplitPane dividerPositions="0.28,0.78" BorderPane.alignment="CENTER">
+            <items>
+                <ScrollPane fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="AS_NEEDED" prefWidth="380">
+                    <content>
+                        <VBox spacing="14" styleClass="panel-shell">
+                            <padding>
+                                <Insets top="18" right="16" bottom="18" left="16"/>
+                            </padding>
+
+                            <VBox spacing="8" styleClass="card">
+                                <Label text="Başlangıç Noktası" styleClass="section-title"/>
+                                <ComboBox fx:id="startLocationCombo" promptText="Başlangıç seçin"/>
+                            </VBox>
+
+                            <VBox spacing="8" styleClass="card">
+                                <Label text="Arama" styleClass="section-title"/>
+                                <TextField fx:id="searchField" promptText="İlçe veya mekan ara"/>
+                            </VBox>
+
+                            <VBox spacing="8" styleClass="card">
+                                <Label text="Gezilecek Yerler" styleClass="section-title"/>
+                                <TabPane prefHeight="330">
+                                    <tabs>
+                                        <Tab text="İlçeler / Semtler" closable="false">
+                                            <content>
+                                                <ListView fx:id="districtListView" prefHeight="280"/>
+                                            </content>
+                                        </Tab>
+                                        <Tab text="Tarihi / Turistik" closable="false">
+                                            <content>
+                                                <ListView fx:id="historicalListView" prefHeight="280"/>
+                                            </content>
+                                        </Tab>
+                                    </tabs>
+                                </TabPane>
+                            </VBox>
+
+                            <VBox spacing="8" styleClass="card">
+                                <Label text="Rota Türü" styleClass="section-title"/>
+                                <RadioButton text="En Kısa" toggleGroup="$routePreferenceGroup" fx:id="shortestDistanceRadio" selected="true"/>
+                                <RadioButton text="En Ucuz" toggleGroup="$routePreferenceGroup" fx:id="lowestCostRadio"/>
+                                <RadioButton text="En Hızlı" toggleGroup="$routePreferenceGroup" fx:id="shortestTimeRadio"/>
+                                <RadioButton text="En Az Aktarma" toggleGroup="$routePreferenceGroup" fx:id="leastTransferRadio"/>
+                                <RadioButton text="Dengeli" toggleGroup="$routePreferenceGroup" fx:id="balancedRadio"/>
+                            </VBox>
+
+                            <VBox spacing="8" styleClass="card">
+                                <Label text="Günlük Gezi Süresi" styleClass="section-title"/>
+                                <Spinner fx:id="dailyHoursSpinner" prefWidth="180"/>
+                            </VBox>
+
+                            <VBox spacing="8" styleClass="card">
+                                <Label text="Bütçe Limiti" styleClass="section-title"/>
+                                <TextField fx:id="budgetField" promptText="Örn: 2000"/>
+                            </VBox>
+
+                            <VBox spacing="8" styleClass="card">
+                                <Label text="Rota Adı" styleClass="section-title"/>
+                                <TextField fx:id="routeNameField" promptText="Rota adı"/>
+                            </VBox>
+
+                            <HBox spacing="10" styleClass="button-row">
+                                <Button fx:id="generateRouteButton" text="Rota Oluştur" onAction="#handleGenerateRoute" maxWidth="1.0" minWidth="150" prefHeight="44" prefWidth="170" HBox.hgrow="ALWAYS"/>
+                                <Button fx:id="clearButton" text="Temizle" onAction="#handleClear" maxWidth="1.0" minWidth="130" prefHeight="44" prefWidth="150" HBox.hgrow="ALWAYS"/>
+                            </HBox>
+                            <HBox spacing="10" styleClass="button-row">
+                                <Button fx:id="saveButton" text="Rota Kaydet" onAction="#handleSaveRoute" maxWidth="1.0" minWidth="140" prefHeight="44" prefWidth="165" HBox.hgrow="ALWAYS"/>
+                                <Button fx:id="whatIfButton" text="What-If Başlat" onAction="#handleOpenWhatIf" maxWidth="1.0" minWidth="150" prefHeight="44" prefWidth="170" HBox.hgrow="ALWAYS"/>
+                            </HBox>
+                        </VBox>
+                    </content>
+                </ScrollPane>
+
+                <StackPane styleClass="map-shell">
+                    <Pane fx:id="mapPane" prefWidth="900" prefHeight="740" minWidth="700" minHeight="640"/>
+                </StackPane>
+
+                <ScrollPane fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="AS_NEEDED">
+                    <content>
+                        <VBox spacing="14" styleClass="panel-shell">
+                            <padding>
+                                <Insets top="18" right="16" bottom="18" left="16"/>
+                            </padding>
+
+                            <VBox spacing="10" styleClass="card">
+                                <Label text="Rota Özeti" styleClass="section-title"/>
+                                <GridPane hgap="10" vgap="10">
+                                    <children>
+                                        <Label text="Mesafe" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                                        <Label fx:id="totalDistanceLabel" text="-" styleClass="summary-value" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+                                        <Label text="Süre" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                                        <Label fx:id="totalTimeLabel" text="-" styleClass="summary-value" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+                                        <Label text="Maliyet" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                                        <Label fx:id="totalCostLabel" text="-" styleClass="summary-value" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+                                        <Label text="Aktarma" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                                        <Label fx:id="totalTransfersLabel" text="-" styleClass="summary-value" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+                                        <Label text="Tahmini Gün" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+                                        <Label fx:id="estimatedDaysLabel" text="-" styleClass="summary-value" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+                                        <Label text="Zorluk" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+                                        <Label fx:id="difficultyLabel" text="-" styleClass="summary-value" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+                                    </children>
+                                </GridPane>
+                                <Label fx:id="budgetStatusLabel" text="Bütçe girilmedi" styleClass="budget-note"/>
+                                <Label fx:id="selectedCountLabel" text="0 nokta seçildi" styleClass="muted-note"/>
+                                <Label fx:id="routeSummaryLabel" text="Henüz rota oluşturulmadı" wrapText="true" styleClass="summary-route"/>
+                                <Label fx:id="statusLabel" text="Hazır" styleClass="status-ok"/>
+                            </VBox>
+
+                            <VBox spacing="8" styleClass="card">
+                                <Label text="Rota Adımları" styleClass="section-title"/>
+                                <ListView fx:id="routeStepsListView" prefHeight="220"/>
+                            </VBox>
+
+                            <VBox spacing="8" styleClass="card">
+                                <Label text="Günlük Plan" styleClass="section-title"/>
+                                <Accordion fx:id="dayPlanAccordion" prefHeight="220"/>
+                            </VBox>
+
+                            <VBox spacing="8" styleClass="card">
+                                <Label text="Alternatif Rotalar" styleClass="section-title"/>
+                                <TableView fx:id="alternativesTableView" prefHeight="240">
+                                    <columns>
+                                        <TableColumn fx:id="alternativeTypeColumn" text="Rota Türü" prefWidth="120"/>
+                                        <TableColumn fx:id="alternativeDistanceColumn" text="Mesafe" prefWidth="75"/>
+                                        <TableColumn fx:id="alternativeTimeColumn" text="Süre" prefWidth="75"/>
+                                        <TableColumn fx:id="alternativeCostColumn" text="Maliyet" prefWidth="80"/>
+                                        <TableColumn fx:id="alternativeTransferColumn" text="Aktarma" prefWidth="70"/>
+                                    </columns>
+                                </TableView>
+                            </VBox>
+
+                            <VBox spacing="8" styleClass="card">
+                                <Label text="Detaylar" styleClass="section-title"/>
+                                <TextArea fx:id="routeDetailsArea" prefRowCount="10" wrapText="true"/>
+                            </VBox>
+                        </VBox>
+                    </content>
+                </ScrollPane>
+            </items>
+        </SplitPane>
+    </center>
+</BorderPane>
