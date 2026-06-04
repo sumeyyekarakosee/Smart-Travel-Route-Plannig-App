@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane fx:id="rootPane" styleClass="app-root" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17.0.12" fx:controller="ui.controller.WhatIfController">
+    <fx:define>
+        <ToggleGroup fx:id="actionGroup" />
+    </fx:define>
+
+    <top>
+        <VBox spacing="6" styleClass="header-bar">
+            <padding>
+                <Insets bottom="16" left="24" right="24" top="18" />
+            </padding>
+            <Label styleClass="app-title" text="What-If Simülasyonu" />
+            <Label fx:id="currentRouteLabel" styleClass="app-subtitle" text="Başlangıç planı" />
+        </VBox>
+    </top>
+
+    <left>
+        <ScrollPane fitToWidth="true" hbarPolicy="NEVER" prefWidth="320" vbarPolicy="AS_NEEDED">
+            <content>
+                <VBox spacing="14" styleClass="panel-shell">
+                    <padding>
+                        <Insets bottom="18" left="16" right="16" top="18" />
+                    </padding>
+
+                    <VBox spacing="8" styleClass="card">
+                        <Label styleClass="section-title" text="İşlem Modu" />
+                        <RadioButton fx:id="removeModeRadio" selected="true" text="Lokasyon Çıkarma">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="actionGroup" />
+                     </toggleGroup></RadioButton>
+                        <RadioButton fx:id="addModeRadio" text="Lokasyon Ekleme" toggleGroup="$actionGroup" />
+                    </VBox>
+
+                    <VBox spacing="8" styleClass="card">
+                        <Label styleClass="section-title" text="Lokasyon Seçimi" />
+                        <ComboBox fx:id="locationComboBox" promptText="Lokasyon seçin" />
+                    </VBox>
+
+                    <HBox spacing="10" styleClass="button-row">
+                        <Button fx:id="removeButton" maxWidth="142.0" onAction="#handleRemoveLocation" prefHeight="26.0" prefWidth="142.0" text="Lokasyon Çıkar" HBox.hgrow="ALWAYS" />
+                        <Button fx:id="addButton" maxWidth="134.0" onAction="#handleAddLocation" prefHeight="26.0" prefWidth="134.0" text="Lokasyon Ekle" HBox.hgrow="ALWAYS" />
+                    </HBox>
+                    <HBox spacing="10" styleClass="button-row">
+                        <Button fx:id="undoButton" maxWidth="103.0" onAction="#handleUndo" prefHeight="26.0" prefWidth="103.0" text="Geri Al" HBox.hgrow="ALWAYS" />
+                        <Button fx:id="clearButton" maxWidth="175.0" onAction="#handleClearSimulation" prefHeight="26.0" prefWidth="175.0" text="Simülasyonu Temizle" HBox.hgrow="ALWAYS" />
+                    </HBox>
+
+                    <VBox spacing="8" styleClass="card">
+                        <Label styleClass="section-title" text="Durum" />
+                        <Label fx:id="statusLabel" styleClass="status-ok" text="Hazır" wrapText="true" />
+                    </VBox>
+
+                    <Button maxWidth="167.0" onAction="#handleClose" prefHeight="26.0" prefWidth="167.0" text="Pencereyi Kapat" />
+                </VBox>
+            </content>
+        </ScrollPane>
+    </left>
+
+    <center>
+        <ScrollPane fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="AS_NEEDED">
+            <content>
+                <VBox spacing="14" styleClass="panel-shell">
+                    <padding>
+                        <Insets bottom="18" left="16" right="16" top="18" />
+                    </padding>
+
+                    <VBox spacing="8" styleClass="card">
+                        <Label styleClass="section-title" text="Karşılaştırma Paneli" />
+                        <Label styleClass="muted-note" text="Eski rota ile yeni rota arasındaki farklar aşağıda gösterilir." />
+                    </VBox>
+
+                    <SplitPane dividerPositions="0.5">
+                        <items>
+                            <VBox spacing="8" styleClass="card">
+                                <Label styleClass="section-title" text="Eski Rota" />
+                                <TextArea fx:id="oldPlanArea" prefRowCount="18" wrapText="true" />
+                            </VBox>
+                            <VBox spacing="8" styleClass="card">
+                                <Label styleClass="section-title" text="Yeni Rota" />
+                                <TextArea fx:id="newPlanArea" prefRowCount="18" wrapText="true" />
+                            </VBox>
+                        </items>
+                    </SplitPane>
+
+                    <VBox spacing="8" styleClass="card">
+                        <Label styleClass="section-title" text="Farklar" />
+                        <TextArea fx:id="comparisonArea" prefRowCount="12" wrapText="true" />
+                    </VBox>
+                </VBox>
+            </content>
+        </ScrollPane>
+    </center>
+</BorderPane>

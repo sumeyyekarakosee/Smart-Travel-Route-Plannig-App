@@ -1,0 +1,62 @@
+# id;name;visitTime;entryFee;rating;x;y
+
+# =========================
+# İLÇELER / SEMT NOKTALARI
+# =========================
+
+1;Kadıköy;90;0;4.7;620;360
+2;Üsküdar;90;0;4.6;570;295
+3;Eminönü;90;0;4.6;430;285
+4;Sultanahmet;90;0;4.9;455;325
+5;Karaköy;75;0;4.5;410;250
+6;Taksim;90;0;4.5;385;190
+7;Beşiktaş;90;0;4.6;480;185
+8;Ortaköy;75;0;4.7;515;170
+9;Balat;90;0;4.5;340;245
+10;Kuzguncuk;75;0;4.6;575;245
+11;Moda Sahili;90;0;4.7;635;385
+12;Bağdat Caddesi;120;0;4.5;690;405
+13;Bakırköy;90;0;4.4;300;410
+14;Fatih;90;0;4.6;405;320
+15;Eyüp;90;0;4.6;315;220
+16;Sarıyer;90;0;4.7;470;60
+17;Bebek;75;0;4.7;500;125
+18;Arnavutköy Sahili;75;0;4.6;505;145
+19;Beykoz;90;0;4.6;625;85
+20;Ataşehir;90;0;4.4;675;330
+
+
+# =========================
+# GEZİLECEK TARİHİ VE TURİSTİK YERLER
+# =========================
+
+21;Ayasofya;120;25;4.9;465;310
+22;Topkapı Sarayı;180;40;4.8;445;300
+23;Sultanahmet Camii;90;0;4.8;470;325
+24;Yerebatan Sarnıcı;60;20;4.7;460;318
+25;Gülhane Parkı;60;0;4.5;430;305
+26;İstanbul Arkeoloji Müzeleri;90;25;4.6;440;302
+27;Kapalıçarşı;120;0;4.6;405;335
+28;Mısır Çarşısı;75;0;4.5;420;285
+29;Süleymaniye Camii;90;0;4.8;390;285
+30;Galata Kulesi;75;30;4.7;390;245
+31;İstiklal Caddesi;120;0;4.5;390;210
+32;Dolmabahçe Sarayı;150;35;4.8;455;200
+33;Kız Kulesi;60;20;4.7;545;285
+34;Pierre Loti Tepesi;90;15;4.6;300;205
+35;Miniatürk;120;20;4.5;325;160
+36;Çamlıca Kulesi;75;25;4.6;655;215
+37;Çamlıca Tepesi;90;0;4.7;645;230
+38;Beylerbeyi Sarayı;90;30;4.7;585;210
+39;Rumeli Hisarı;90;25;4.7;510;95
+40;Anadolu Hisarı;75;15;4.5;600;100
+41;Eyüp Sultan Camii;90;0;4.8;315;220
+42;Fener Rum Patrikhanesi;60;0;4.5;350;240
+43;Kariye Camii;90;20;4.6;330;260
+44;Rahmi Koç Müzesi;120;25;4.6;345;210
+45;Yedikule Hisarı;90;20;4.4;345;385
+46;Emirgan Korusu;90;0;4.7;475;75
+47;Fenerbahçe Parkı;75;0;4.6;660;390
+48;Haydarpaşa Garı;60;0;4.6;590;345
+49;İstanbul Deniz Müzesi;90;20;4.5;475;190
+50;Sakıp Sabancı Müzesi;90;30;4.6;470;85
